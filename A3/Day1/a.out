@@ -1,0 +1,68 @@
+#! /c/iverilog/bin/vvp
+:ivl_version "0.9.7 " "(v0_9_7)";
+:vpi_time_precision - 12;
+:vpi_module "system";
+:vpi_module "v2005_math";
+:vpi_module "va_math";
+S_001E6DE0 .scope module, "testbench" "testbench" 2 1;
+ .timescale -9 -12;
+P_001E4BB4 .param/l "CYCLE" 2 4, +C4<01111101000>;
+P_001E4BC8 .param/l "DLY" 2 6, +C4<0111110100>;
+P_001E4BDC .param/l "HALF_CYCLE" 2 5, +C4<0111110100>;
+v001E48D8_0 .var "clk", 0 0;
+v001E4930_0 .var "inA", 0 0;
+v001E4988_0 .var "inB", 0 0;
+v001E49E0_0 .net "out_xor_gate", 0 0, L_001E4B28; 1 drivers
+E_001E89D0 .event posedge, v001E48D8_0;
+S_001E4520 .scope module, "xor_gate_0" "xor_gate" 2 14, 3 3, S_001E6DE0;
+ .timescale -9 -12;
+L_001E4B28 .functor XOR 1, v001E4930_0, v001E4988_0, C4<0>, C4<0>;
+v001E6E68_0 .net "inA", 0 0, v001E4930_0; 1 drivers
+v001E45A8_0 .net "inB", 0 0, v001E4988_0; 1 drivers
+v001E4600_0 .alias "out", 0 0, v001E49E0_0;
+    .scope S_001E6DE0;
+T_0 ;
+    %set/v v001E48D8_0, 1, 1;
+    %delay 500000, 0;
+    %set/v v001E48D8_0, 0, 1;
+    %delay 500000, 0;
+    %jmp T_0;
+    .thread T_0;
+    .scope S_001E6DE0;
+T_1 ;
+    %vpi_call 2 29 "$dumpfile", "xor.vcd";
+    %vpi_call 2 30 "$dumpvars";
+    %set/v v001E4930_0, 0, 1;
+    %set/v v001E4988_0, 0, 1;
+    %set/v v001E4930_0, 0, 1;
+    %set/v v001E4988_0, 0, 1;
+    %delay 100000, 0;
+    %vpi_call 2 36 "$display", "inA=%b inB=%b out=%b", v001E4930_0, v001E4988_0, v001E49E0_0;
+    %set/v v001E4930_0, 1, 1;
+    %set/v v001E4988_0, 0, 1;
+    %delay 100000, 0;
+    %vpi_call 2 38 "$display", "inA=%b inB=%b out=%b", v001E4930_0, v001E4988_0, v001E49E0_0;
+    %set/v v001E4930_0, 0, 1;
+    %set/v v001E4988_0, 1, 1;
+    %delay 100000, 0;
+    %vpi_call 2 40 "$display", "inA=%b inB=%b out=%b", v001E4930_0, v001E4988_0, v001E49E0_0;
+    %set/v v001E4930_0, 1, 1;
+    %set/v v001E4988_0, 1, 1;
+    %delay 100000, 0;
+    %vpi_call 2 42 "$display", "inA=%b inB=%b out=%b", v001E4930_0, v001E4988_0, v001E49E0_0;
+    %movi 8, 10, 5;
+T_1.0 %cmp/s 0, 8, 5;
+    %jmp/0xz T_1.1, 5;
+    %add 8, 1, 5;
+    %wait E_001E89D0;
+    %jmp T_1.0;
+T_1.1 ;
+    %vpi_call 2 45 "$finish";
+    %end;
+    .thread T_1;
+# The file index is used to find the file name in the following table.
+:file_names 4;
+    "N/A";
+    "<interactive>";
+    "testbench3.v";
+    "xor_gate.v";
