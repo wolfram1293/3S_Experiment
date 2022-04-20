@@ -1,0 +1,21 @@
+Circuit: * C:\Users\Yuki Sakamoto\A\A2 21.asc
+
+Direct Newton iteration for .op point succeeded.
+
+Date: Mon Jun 08 14:27:19 2020
+Total elapsed time: 1.308 seconds.
+
+tnom = 27
+temp = 27
+method = modified trap
+totiter = 309173
+traniter = 309162
+tranpoints = 103412
+accept = 73442
+rejected = 29970
+matrix size = 12
+fillins = 5
+solver = Normal
+Matrix Compiler1: 902 bytes object code size  0.2/0.1/[0.1]
+Matrix Compiler2: 1.26 KB object code size  0.1/0.2/[0.1]
+
